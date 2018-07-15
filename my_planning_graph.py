@@ -327,14 +327,6 @@ class PlanningGraph():
         :return:
             adds S nodes to the current level in self.s_levels[level]
         '''
-        # TODO add literal S level to the planning graph as described in the Russell-Norvig text
-        # 1. determine what literals to add
-        # 2. connect the nodes
-        # for example, every A node in the previous level has a list of S nodes in effnodes that represent the effect
-        #   produced by the action.  These literals will all be part of the new S level.  Since we are working with sets, they
-        #   may be "added" to the set without fear of duplication.  However, it is important to then correctly create and connect
-        #   all of the new S nodes as children of all the A nodes that could produce them, and likewise add the A nodes to the
-        #   parent sets of the S nodes
         self.s_levels.append(set())
         
         # loop through all actions of previous level to see which ones cause this state
@@ -392,11 +384,6 @@ class PlanningGraph():
         Test a pair of actions for inconsistent effects, returning True if
         one action negates an effect of the other, and False otherwise.
 
-        HINT: The Action instance associated with an action node is accessible
-        through the PgNode_a.action attribute. See the Action class
-        documentation for details on accessing the effects and preconditions of
-        an action.
-
         :param node_a1: PgNode_a
         :param node_a2: PgNode_a
         :return: bool
@@ -410,11 +397,6 @@ class PlanningGraph():
         '''
         Test a pair of actions for mutual exclusion, returning True if the 
         effect of one action is the negation of a precondition of the other.
-
-        HINT: The Action instance associated with an action node is accessible
-        through the PgNode_a.action attribute. See the Action class
-        documentation for details on accessing the effects and preconditions of
-        an action.
 
         :param node_a1: PgNode_a
         :param node_a2: PgNode_a
@@ -469,10 +451,6 @@ class PlanningGraph():
         Test a pair of state literals for mutual exclusion, returning True if
         one node is the negation of the other, and False otherwise.
 
-        HINT: Look at the PgNode_s.__eq__ defines the notion of equivalence for
-        literal expression nodes, and the class tracks whether the literal is
-        positive or negative.
-
         :param node_s1: PgNode_s
         :param node_s2: PgNode_s
         :return: bool
@@ -487,9 +465,6 @@ class PlanningGraph():
         mutex if all of the actions that could achieve the first literal node
         are pairwise mutually exclusive with all of the actions that could
         achieve the second literal node.
-
-        HINT: The PgNode.is_mutex method can be used to test whether two nodes
-        are mutually exclusive.
 
         :param node_s1: PgNode_s
         :param node_s2: PgNode_s

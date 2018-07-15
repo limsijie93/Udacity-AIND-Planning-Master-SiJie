@@ -14,19 +14,6 @@ from functools import lru_cache
 
 class AirCargoProblem(Problem):
     def __init__(self, cargos, planes, airports, initial: FluentState, goal: list):
-        """
-
-        :param cargos: list of str
-            cargos in the problem
-        :param planes: list of str
-            planes in the problem
-        :param airports: list of str
-            airports in the problem
-        :param initial: FluentState object
-            positive and negative literal fluents (as expr) describing initial state
-        :param goal: list of expr
-            literal fluents required for goal test
-        """
         self.state_map = initial.pos + initial.neg
         self.initial_state_TF = encode_state(initial, self.state_map)
         Problem.__init__(self, self.initial_state_TF, goal=goal)
@@ -180,7 +167,6 @@ class AirCargoProblem(Problem):
         conditions by ignoring the preconditions required for an action to be
         executed.
         """
-        # TODO implement (see Russell-Norvig Ed-3 10.2.3  or Russell-Norvig Ed-2 11.2)
         count = 0
         kb = PropKB()
         kb.tell(decode_state(node.state, self.state_map).pos_sentence())
